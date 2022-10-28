@@ -10,21 +10,21 @@ package Model;
  */
 public class Lawyer extends Addresses {
     
-    long Id;
+    public long Id;
 
-    long Id_Company; 
+    public long Id_Company; 
 
-    String Name;
+    public String Name;
 
-    String Registration_Number; 
+    public String Registration_Number; 
 
-    String Sectional_Council;
+    public String Sectional_Council;
 
-    int Inscription_Type;
+    public int Inscription_Type;
 
-    String Email;
+    public String Email;
 
-    String Phone;
+    public String Phone;
 
     public Lawyer()
     {
@@ -43,26 +43,5 @@ public class Lawyer extends Addresses {
         District = "";
         City = "";
         State = "";
-    }
-
-    public void Insert()
-    {
-
-    }
-
-    public void Load()
-    {
-
-    }
-
-    public void Update()
-    {
-
-    }
-
-    public void Delete()
-    {
-
-    }
-    
+    }    
 }

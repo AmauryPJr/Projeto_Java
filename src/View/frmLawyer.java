@@ -4,6 +4,7 @@
  */
 package View;
 
+import Model.Lawyer;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +19,12 @@ public class frmLawyer extends javax.swing.JFrame {
     public frmLawyer() {
         initComponents();
     }
+    
+    //<editor-fold defaultstate="collapsed" desc="VARIÁVEIS">
+    
+    Lawyer lawyer = new Lawyer();
+    
+    //</editor-fold>
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -282,7 +289,9 @@ public class frmLawyer extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            
+            if (Validacao() = true) {
+                Salvar();
+            }
         }
         catch(Exception ex) {
             StringBuilder error = new StringBuilder();
@@ -327,6 +336,75 @@ public class frmLawyer extends javax.swing.JFrame {
             }
         });
     }
+    
+    //<editor-fold defaultstate="collapsed" desc="Metódos">
+    
+    public boolean Validacao() {
+        try {
+            if ("".equals(txtName.getText())) {
+                return false;
+            }
+
+            if ("".equals(txtRegistration_Number.getText())) {
+                return false;
+            }
+
+            if ("".equals(txtEmail.getText())) {
+                return false;
+            }
+
+            if ("".equals(txtAddress.getText())) {
+                return false;
+            }
+
+            if ("".equals(txtNumber.getText())) {
+                return false;
+            }
+
+            if ("".equals(txtDistrict.getText())) {
+                return false;
+            }
+
+            if ("".equals(txtCity.getText())) {
+                return false;
+            }
+
+            return true;
+        }
+        catch(Exception ex) {
+            StringBuilder error = new StringBuilder();
+            
+            error.append("Ocoreu um erro: ").append(ex.getMessage());
+            
+            JOptionPane.showMessageDialog(null, error);   
+            
+            return false;
+        }
+    } 
+    
+    public void Salvar() {
+        try {
+            lawyer.Name = txtName.getText();
+            lawyer.Registration_Number = txtRegistration_Number.getText();
+            lawyer.Email = txtEmail.getText();
+            lawyer.Address = txtAddress.getText();
+            lawyer.Number = Integer.parseInt(txtNumber.getText());
+            lawyer.District = txtDistrict.getText();
+            lawyer.City = txtCity.getText();
+            
+            
+            
+        }
+        catch (Exception ex) {
+            StringBuilder error = new StringBuilder();
+            
+            error.append("Ocoreu um erro: ").append(ex.getMessage());
+            
+            JOptionPane.showMessageDialog(null, error);
+        }
+    }
+    
+    //</editor-fold>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;

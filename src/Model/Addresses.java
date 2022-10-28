@@ -9,15 +9,15 @@ package Model;
  * @author Amaury
  */
 public class Addresses {
-    String Address_Code;
+    public String Address_Code;
 
-    String Address;
+    public String Address;
 
-    int Number;
+    public int Number;
 
-    String District;
+    public String District;
 
-    String City;
+    public String City;
 
-    String State;
+    public String State;
 }
