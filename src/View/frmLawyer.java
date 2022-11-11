@@ -4,8 +4,13 @@
  */
 package View;
 
+import Controller.LawyerController;
 import Model.Lawyer;
 import javax.swing.JOptionPane;
+import Controller.Module;
+import java.awt.Dialog;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,11 +23,18 @@ public class frmLawyer extends javax.swing.JFrame {
      */
     public frmLawyer() {
         initComponents();
+        
+        try {
+            ConfiguraFormulario();
+        } catch (Exception ex) {
+            Logger.getLogger(frmLawyer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     //<editor-fold defaultstate="collapsed" desc="VARIÁVEIS">
     
     Lawyer lawyer = new Lawyer();
+    LawyerController lawyerController = new LawyerController();
     
     //</editor-fold>
 
@@ -67,6 +79,7 @@ public class frmLawyer extends javax.swing.JFrame {
         txtNumber = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("frmLawyer"); // NOI18N
 
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +302,7 @@ public class frmLawyer extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            if (Validacao() = true) {
+            if (Validacao() == true) {
                 Salvar();
             }
         }
@@ -339,6 +352,18 @@ public class frmLawyer extends javax.swing.JFrame {
     
     //<editor-fold defaultstate="collapsed" desc="Metódos">
     
+    public void ConfiguraFormulario() throws Exception {
+        Module mod = new Module();
+        
+        mod.LoadCombo(cboCompany, "sp_select_combo_company");
+        
+        JOptionPane.showMessageDialog(null, cboCompany.getSelectedObjects());
+                
+        mod.LoadCombo(cboInscription_Type, "sp_select_combo_inscription_type");
+        mod.LoadCombo(cboSectional_Council, "sp_select_combo_state");
+        mod.LoadCombo(cboState, "sp_select_combo_state");
+    }
+    
     public boolean Validacao() {
         try {
             if ("".equals(txtName.getText())) {
@@ -386,14 +411,18 @@ public class frmLawyer extends javax.swing.JFrame {
         try {
             lawyer.Name = txtName.getText();
             lawyer.Registration_Number = txtRegistration_Number.getText();
+            lawyer.Sectional_Council = cboSectional_Council.getSelectedItem().toString();
+            lawyer.Inscription_Type = cboInscription_Type.getSelectedIndex();
             lawyer.Email = txtEmail.getText();
+            lawyer.Phone = txtPhone.getText();
+            lawyer.Id_Company = cboCompany.getSelectedIndex();
             lawyer.Address = txtAddress.getText();
             lawyer.Number = Integer.parseInt(txtNumber.getText());
             lawyer.District = txtDistrict.getText();
             lawyer.City = txtCity.getText();
+            lawyer.State = cboState.getSelectedItem().toString();
             
-            
-            
+            lawyerController.Insert(lawyer);
         }
         catch (Exception ex) {
             StringBuilder error = new StringBuilder();

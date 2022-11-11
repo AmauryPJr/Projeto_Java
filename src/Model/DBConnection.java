@@ -5,7 +5,6 @@
 package Model;
 //import com.microsoft.sqlserver.jdbc;
 import java.sql.*;
-import com.sun.jdi.connect.spi;
 /**
  *
  * @author Amaury
@@ -14,19 +13,19 @@ public class DBConnection {
     public DBConnection() {
     }
     
-    public Connection ToConnect() {
+    public Connection ToConnect() throws Exception {
         Connection conn = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 
             //Na minha máquina
-            String dbURL = "jdbc:sqlserver://AMAURYPJR";
+            String dbURL = "jdbc:sqlserver://localhost\\MSSQLSERVER";
             String user = "sa";
             String pass = "MasterKey21@";
-            conn = (Connection) DriverManager.getConnection(dbURL, user, pass);        
+            conn = DriverManager.getConnection(dbURL, user, pass);        
         }
         catch (Exception ex) {
-            
+            throw ex;
         }
         
         return conn;
